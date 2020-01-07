@@ -18,15 +18,15 @@ $(".contentRow").each(function(){
    let currHour = currTime.format("HH");
    let relation = compareTimes(rowHour,currHour);
    if(relation==="second"){
-            $(this).removeClass("present future").addClass("past");
+            $(this).children(".eventCol").removeClass("present future").addClass("past");
         }//if past
  
         else if(relation=="same"){
-         $(this).removeClass("past future").addClass("present");
+         $(this).children(".eventCol").removeClass("past future").addClass("present");
         }
  
         else{
-         $(this).removeClass("past present").addClass("future");
+         $(this).children(".eventCol").removeClass("past present").addClass("future");
         }
  
 });
