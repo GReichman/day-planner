@@ -3,11 +3,13 @@ var currTime = moment();
 $("#currentDay").html(currTime.format("LL"));
 changeTimes();
 displayEvents();
+backgroundChanger();
+
 $(".saveBtn").on("click",function(){
     saveEvent($(this).parent());
    
 });
-
+$(".saveBtn").append("<img src='assets/images/floppy-disk.png'>");
 setInterval(function(){
     var newMoment = moment();
     
@@ -16,6 +18,8 @@ setInterval(function(){
         currTime=newMoment;
         changeTimes();
     }//if new hour
+
+    backgroundChanger();
     console.log(newMoment.format("hh:mm"));
 },60000);
 
@@ -86,8 +90,32 @@ function compareTimes(first, second) {
 
 }//compare Times
 
-function colorChanger(){
+function backgroundChanger(){
+    /* background-color: #FC9C54; morning*/
+    /* background-color: #FFE373; midday */
+    /* background-color:#FD5E53; sunset*/
+    /* background-color: #0f0b42; night  */
     
+var hour = currTime.format("HH");
+
+if (hour>=18 && hour < 22){
+    $("body").css("background-color","#FD5E53");
+}//if evening
+else if(hour>=7 && hour <12){
+    $("body").css("background-color"," #FC9C54");
+
+}//if morning
+else if(hour >=12 && hour <18){
+    $("body").css("background-color","#FFE373");
+
+}//if midday
+else{
+    $("body").css("background-color","#0f0b42");
+
+}//else night
+
+
+
 
 
 
