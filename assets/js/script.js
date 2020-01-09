@@ -8,9 +8,16 @@ $(".saveBtn").on("click",function(){
    
 });
 
-function firstLoad(){
-    localStorage.setItem("9am", "test");
-}
+setInterval(function(){
+    var newMoment = moment();
+    
+    if(newMoment.format("HH")!= currTime.format("HH")){
+        console.log("new hour");
+        currTime=newMoment;
+        changeTimes();
+    }//if new hour
+    console.log(newMoment.format("hh:mm"));
+},60000);
 
 function displayEvents() {
 
@@ -75,6 +82,13 @@ function compareTimes(first, second) {
     else {
         return "first";
     }
+
+
+}//compare Times
+
+function colorChanger(){
+    
+
 
 
 }
