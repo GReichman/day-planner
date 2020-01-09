@@ -1,49 +1,46 @@
 var currTime = moment();
-var savedEvents = [];
 
 $("#currentDay").html(currTime.format("LL"));
 changeTimes();
-getEvents();
 displayEvents();
-function getEvents() {
-    var events = JSON.parse(localStorage.getItem("events"));
-    console.log(events);
+$(".saveBtn").on("click",function(){
+    saveEvent($(this).parent());
+   
+});
 
-    if (events == null) {
-        console.log("hi");
-        events = [" ", " ", " ", " ", " ", " ", " ", " ", " Time For A Beer"];
-        localStorage.setItem("events",JSON.stringify(events));
-        savedEvents = events;
-    }//if first time running site
-
-    else{
-        savedEvents = events;
-
-    }
-
-}//get events
-
-function storeEvents() {
-    localStorage.setItem("events", JSON.stringify(savedEvents));
-
-}//storeEvents
+function firstLoad(){
+    localStorage.setItem("9am", "test");
+}
 
 function displayEvents() {
 
-    var pos = 0;
+    $(".description").each(function() {
 
-    $(".description").each(function () {
-        // console.log(savedEvents[pos]+" "+pos);
-        $(this).val(savedEvents[pos]);
-        pos++;
+        var thisEvent = localStorage.getItem($(this).parent().parent().attr("data-save"));
+        console.log("loading: "+thisEvent);
+        if (thisEvent != null) {
+            $(this).val(thisEvent);
+        }
+        else {
+            localStorage.setItem($(this).attr("data-save"), " ");
+        }
+
     });
 
 
 }//displayEvents
 
+function saveEvent(clicked) {
+    var thisEvent = clicked.prev().children(".description").val();
+    var saveSlot = clicked.parent().attr("data-save");
+    console.log(thisEvent);
+    console.log(saveSlot);
+    localStorage.setItem(saveSlot,thisEvent);
+}
+
 function changeTimes() {
     $(".contentRow").each(function () {
- 
+
         let rowHour = $(this).attr("data-hour");
         let currHour = currTime.format("HH");
         let relation = compareTimes(rowHour, currHour);
