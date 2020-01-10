@@ -111,7 +111,7 @@ else if(hour >=12 && hour <18){
 }//if midday
 else{
     $("body").css("background-color","#0f0b42");
-
+    $(".headerText").css("color","white");
 }//else night
 
 
