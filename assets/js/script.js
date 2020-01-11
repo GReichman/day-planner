@@ -1,6 +1,8 @@
 var currTime = moment();
 
 $("#currentDay").html(currTime.format("LL"));
+// $("#currentDay").append("<p>"+currTime.format("LL")+"</p>");
+console.log("Today is: "+currTime.format("LL"));
 changeTimes();
 displayEvents();
 backgroundChanger();
